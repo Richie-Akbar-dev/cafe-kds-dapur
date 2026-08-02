@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000",
-    "build": "mkdir -p db && prisma generate && next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
-    "start": "mkdir -p db && prisma db push --accept-data-loss 2>/dev/null && NODE_ENV=production node .next/standalone/server.js",
+    "build": "npx prisma generate && npx prisma db push --accept-data-loss 2>/dev/null && next build",
+    "start": "npx prisma db push --accept-data-loss 2>/dev/null && NODE_ENV=production node .next/standalone/server.js",
     "lint": "eslint .",
-    "db:push": "prisma db push --accept-data-loss",
-    "db:generate": "prisma generate"
+    "db:push": "npx prisma db push --accept-data-loss",
+    "db:generate": "npx prisma generate",
+    "db:migrate": "npx prisma migrate deploy",
+    "postinstall": "npx prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.11.1",
